@@ -1,0 +1,81 @@
+<!--标题 -->
+<div class="am-cf am-padding">
+	<div class="am-modal-hd am-fl am-cf">
+		<strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add address</small>
+	</div>
+</div>
+<hr/>
+
+<div class="am-u-md-12 am-modal-bd" style="max-width: 600px;border-bottom: none">
+	<form class="am-form am-form-horizontal" id="form-address-add">
+		<div class="am-form-group">
+			<label for="user-name" class="am-form-label">收货人</label>
+			<div class="am-form-content">
+				<input type="text" name="consignee" placeholder="收货人">
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="user-phone" class="am-form-label">手机号码</label>
+			<div class="am-form-content">
+				<input name="phone" placeholder="手机号必填" type="text">
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="user-phone" class="am-form-label">所在地</label>
+			<div id="distpicker-add" class="am-form-content address" style="display: flex">
+				<select name="province" data-province="—— 省 ——"></select>
+				<select name="city" data-city="—— 市 ——"></select>
+				<select name="district" data-district="—— 区 ——"></select>
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="user-intro" class="am-form-label">详细地址</label>
+			<div class="am-form-content" style="
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+">
+				<textarea class="" rows="3" name="address" placeholder="100字以内写出你的详细地址..."></textarea>
+				<!--<small style="color: #aaa"></small>-->
+			</div>
+		</div>
+
+		<div class="am-form-group theme-poptit">
+			<div class="am-u-sm-9 am-u-sm-push-3"style="position: relative;left:50px;">
+				<a href="javascript:;" id="add-address-submit" class="am-btn am-btn-danger" >确定</a>
+				{notempty name="isPopover"}
+				<div class="am-btn am-btn-danger close" data-am-modal-close>取消</div>
+				{/notempty}
+			</div>
+		</div>
+	</form>
+	<script>
+		$(function(){
+			let dpAdd = $('#distpicker-add').distpicker(),
+				my_alert = $('#doc-modal-alert');
+			$(document).on('click', '#add-address-submit', function (){
+				$.ajax({
+					type: "POST",
+					url: "{:url('index/person/newDefault')}",
+					dataType: "json",
+					data: $('#form-address-add').serialize(),
+					success: function(data){
+						if(my_alert.length === 0){
+							alert(data.msg)
+						} else {
+							$('#doc-modal-alert-info').text(data.msg)
+							my_alert.modal('open')
+						}
+						setTimeout(function () {
+							window.location.reload()
+						},2000)
+					}
+				})
+			})
+
+		})
+	</script>
+</div>

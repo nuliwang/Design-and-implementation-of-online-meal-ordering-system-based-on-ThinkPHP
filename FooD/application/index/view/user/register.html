@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+		<link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css" />
+		<link href="/static/css/dlstyle.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="__STATIC__/fa/css/font-awesome.min.css">
+		<script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+		<script src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+		<script src="/static/layer/layer.js"></script>
+
+
+
+	</head>
+
+	<body>
+
+		<div class="login-boxtitle">
+			<a href="/"><img alt="logo" style="height: 60px;width: 60px" src="__STATIC__/images/FooD.png" /></a>
+		</div>
+
+		<div class="res-banner" style="height: 500px">
+			<div class="res-main">
+				<div class="login-banner-bg"><span></span><img src="__STATIC__/images/FooDbig.png"  style="position: absolute;left:100px ;top:50px "/></div>
+				<div class="login-box" style="height: 450px">
+
+						<div class="am-tabs" id="doc-my-tabs">
+							<ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+								<li class="am-active"><a href="{:url('Index/user/register')}" style="color: red;">用户注册</a></li>
+								<li class="am-active"><a href="{:url('Index/user/mobile_register')}">商户注册</a></li>
+
+							</ul>
+
+							<div class="am-tabs-bd">
+								<div class="am-tab-panel am-active">
+									<form method="post">
+										
+							   <div class="user-email">
+										<label for="email"><i class="am-icon-envelope-o"></i></label>
+										<input type="text" name="username" id="username" placeholder="请输入注册账号"><span id="1111" style="font-size: 14px;color: red;padding-left: 10px;"></span>
+                 			</div>
+										<div class="user-phone">
+											<label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
+											<input type="tel" name="mobile" id="phone" placeholder="请输入手机号">
+										</div>
+										<div class="verification">
+											<label for="code"><i class="am-icon-code-fork"></i></label>
+											<input type="tel" name="yzm" id="code" placeholder="请输入验证码" style="width: 215px;">
+											<input type="button"  id="btn" style="width:80px;color: #999;height: 40px;padding-left: 0;" name="sms" value="点击获取">
+
+										</div>
+
+                 <div class="user-pass">
+								    <label for="password"><i class="am-icon-lock"></i></label>
+								    <input type="password" name="password" id="password" placeholder="设置密码">
+					                <i class="fa fa-eye fa-2x " id="eye" style="position:absolute;left:260px;top:4px;z-index: 999 " ></i>
+                 </div>										
+                 <div class="user-pass">
+								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+
+								    <input type="password" name="repassword" id="repassword" placeholder="确认密码" >
+                 </div>
+
+									<!--	<div class="user-pass">
+											<label for="passwordRepeat"><i class="am-icon-refresh am-icon-spin"></i></i></label>
+											<input type="text" name="captcha" id="code" placeholder="验证码">
+											<p style="margin-top: 10px;"><img src="{:captcha_src()}" alt="captcha" class="passcode" onclick="this.src=this.src+'?'"/></p>
+										</div>
+
+-->
+										<div class="am-cf" style="margin-top: 10px;">
+											<input type="button" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl" onclick="checkLogin()">
+										</div>
+									</form>
+								</div>
+									<hr>
+								</div>
+							</div>
+						</div>
+
+				</div>
+			</div>
+			
+					<div class="footer ">
+						<div class="footer-hd ">
+							<p>
+								<a href="# "></a>
+								<b>|</b>
+								<a href="# ">FooD点餐首页</a>
+								<b>|</b>
+								<a href="# ">支付宝</a>
+								<b>|</b>
+								<a href="# ">物流</a>
+							</p>
+						</div>
+						<div class="footer-bd ">
+							<p>
+								<a href="# "></a>
+								<a href="# ">合作伙伴</a>
+								<a href="# ">联系我们</a>
+								<a href="# ">网站地图</a>
+								<em>© 2020-2020 版权所有</em>
+
+							</p>
+						</div>
+					</div>
+	</body>
+<script>
+
+    function checkLogin() {
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var repassword = $('#repassword').val();
+        var phone = $('#phone').val();
+        var code = $('#code').val();
+    /*    if (username == '') {
+            layer.alert('注册账号不能为空', {icon: 2});
+            return;
+        }
+        if (phone == '') {
+            layer.alert('手机号不能为空', {icon: 2});
+            return;
+        }
+        if (code == '') {
+            layer.alert('验证码不能为空', {icon: 2});
+            return;
+        }
+        if (password == '') {
+            layer.alert('密码不能为空', {icon: 2});
+            return;
+        }
+        if (repassword == '') {
+            layer.alert('确认密码不能为空', {icon: 2});
+            return;
+        }
+        if(password!=repassword){
+            layer.alert('两次密码不一致', {icon: 2});
+            return;
+		}*/
+        $.ajax({
+            type:'post',
+            dataType:'json',
+            data:{
+                'username':username,
+                'password':password,
+                'repassword':repassword,
+                'phone':phone,
+                'code':code,
+            },
+            url:"/index/user/registerUser",
+            success:function (res) {
+                if(res.code==200){
+                    //3秒后跳转
+                    layer.msg(res.msg, {icon: 6});
+                    setTimeout(function () {
+					window.location.href='/index/user/login'
+                    },3000);
+
+                }else {
+                    layer.alert(res.msg, {icon: 5});
+                }
+            }
+        });
+
+
+    }
+var countdown=60;//300s倒计时
+function settime() {
+    if (countdown == 0) {
+        $("#btn").attr("disabled",false);
+        $("#btn").val("免费获取验证码");
+        countdown = 300;
+        return;
+    } else {
+        $("#btn").attr("disabled", true);
+        $("#btn").val("重新发送(" + countdown + ")");
+        countdown--;
+    }
+    //1s执行一次
+    setTimeout(function(){settime()},1000);
+}
+//发送验证码
+$('#btn').click(function () {
+    var phone = $('#phone').val();
+    $.ajax({
+        type:'post',
+        dataType:'json',
+        data:{
+            'phone':phone,
+			'template':'SMS_209170345'
+        },
+        url:"/index/sms/send",
+        success:function (res) {
+            if(res.state==2){
+                layer.msg(res.msg, {icon: 6});
+                settime();
+            }else {
+                layer.alert(res.msg, {icon: 5});
+            }
+        }
+    });
+})
+</script>
+	<script>
+		var eye = document.getElementById('eye');
+		var pwd = document.getElementById('password');
+		var flag = 0;
+		eye.onclick = function() {
+			if (flag == 0) {
+				pwd.type = 'password';
+				eye.setAttribute("class","fa fa-eye fa-2x");
+
+				flag = 1;
+			} else {
+				pwd.type = 'text';
+				eye.setAttribute("class","fa fa-eye-slash fa-2x");
+				flag = 0;
+			}
+
+		}
+
+	</script>
+
+</html>
